@@ -31,20 +31,19 @@ bool editFlag = false;
 HMODULE hmd = LoadLibrary(L"DatabaseCore.dll");
 
 typedef vector<Record*>(*loadDB)();
-loadDB loadDatabase = (loadDB)GetProcAddress(hmd, "?formDatabase@@YA?AV?$vector@PAVRecord@@V?$allocator@PAVRecord@@@std@@@std@@XZ");
-loadDB getAllRecords = (loadDB)GetProcAddress(hmd, "?getAllRecords@@YA?AV?$vector@PAVRecord@@V?$allocator@PAVRecord@@@std@@@std@@XZ");
-
+loadDB loadDatabase = (loadDB)GetProcAddress(hmd, FORM_FUNCTION);
+loadDB getAllRecords = (loadDB)GetProcAddress(hmd, GET_ALL_FUNCTION);
 typedef void(*change)(Record*,Record*, int);
-change changeRecord = (change)GetProcAddress(hmd, "?changeRecord@@YAXPAVRecord@@0H@Z");
+change changeRecord = (change)GetProcAddress(hmd, CHANGE_FUNCTION);
 
 typedef vector<Record*>(*srch)(std::string, int);
-srch search = (srch)GetProcAddress(hmd, "?search@@YA?AV?$vector@PAVRecord@@V?$allocator@PAVRecord@@@std@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@H@Z");
+srch search = (srch)GetProcAddress(hmd, SEARCH_FUNCTION);
 
 typedef void(*del)(Record*);
-del deleteRecord = (del)GetProcAddress(hmd, "?deleteRecord@@YAXPAVRecord@@@Z");
+del deleteRecord = (del)GetProcAddress(hmd, DELETE_FUNCTION);
 
 typedef bool(*add)(Record*);
-add addRecord = (add)GetProcAddress(hmd, "?addNewRecord@@YAHPAVRecord@@@Z");
+add addRecord = (add)GetProcAddress(hmd, ADD_FUNCTION);
 
 // Отправить объявления функций, включенных в этот модуль кода:
 ATOM                MyRegisterClass(HINSTANCE hInstance);

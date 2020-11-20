@@ -12,6 +12,12 @@ using namespace std;
 #define DATABASE_API __declspec(dllexport)
 #endif
 
+#ifdef _WIN64
+#define PATH_TO_DB_FILE "..\\addresses.txt"
+#else
+#define PATH_TO_DB_FILE "..\\addresses.txt"
+#endif
+
 #define ADDRESS 1
 #define SURNAME 2
 #define PHONE 4

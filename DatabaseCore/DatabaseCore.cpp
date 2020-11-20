@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "DatabaseCore.h"
-
+#include <filesystem>
 
 DATABASE_API vector<Record*> __cdecl formDatabase() {
     InitializeCriticalSection(&crSection);
@@ -55,7 +55,7 @@ vector<Record*> select(node* root, string searchingParameter) {
 }
 
 vector<Record*> loadData() {
-    string filePath = "..\\addresses.txt";
+    string filePath = PATH_TO_DB_FILE;
     ifstream dataFile;
     vector<Record*> records;
     dataFile.open(filePath);
