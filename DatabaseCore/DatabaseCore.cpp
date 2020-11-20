@@ -126,7 +126,7 @@ node* deleteNode(node** root, int index, int uniqueIndex) {
         node* tmp = myMin((*root)->rightChild);
        (*root)->index = tmp->index;
        (*root)->record = tmp->record;
-       (*root)->rightChild = deleteNode(&(*root)->rightChild, (*root)->index, uniqueIndex);
+       (*root)->rightChild = deleteNode(&(*root)->rightChild, (*root)->index, hashFunction((*root)->record->phoneNumber));
     }
     else {
         if ((*root)->leftChild != NULL)
