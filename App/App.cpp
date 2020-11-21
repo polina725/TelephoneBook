@@ -299,11 +299,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
                         break;
         case WM_ADD_BTN: {
-            LPWSTR ptr;
             bool allParamsTyped = true;
             vector<std::string> params;
             for (HWND hEd : hEdits) {
-                ptr = ConvertToLPWSTR("");
+                LPWSTR ptr = ConvertToLPWSTR("");
                 GetWindowText(hEd, ptr, 255);
                // SendMessage(hEd, WM_GETTEXT, (WPARAM)255, (LPARAM)ptr);
 
