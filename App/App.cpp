@@ -272,26 +272,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_FIND_BTN: {
 
             LPWSTR ptr = ConvertToLPWSTR("");
-            SendMessage(hEdit, WM_GETTEXT, (WPARAM)255, (LPARAM)ptr);
+            GetWindowText(hEdit, ptr, 255);
+          //  SendMessage(hEdit, WM_GETTEXT, (WPARAM)255, (LPARAM)ptr);
 
             char buffer[500];
-            
             wcstombs(buffer, ptr, 500);
-            if (std::string(buffer).size() == 0)
+            std::string str = std::string(buffer);
+            if (str.size() == 0)
                 break;
             ListView_DeleteAllItems(hWndListView);
             std::vector<Record*> result;
 
             if (lstrcmpW((LPCWSTR)selectedComboBoxItem, L"Phone number") == 0) {
-                  result = search(buffer,PHONE);
+                  result = search(str,PHONE);
             }
 
             if (lstrcmpW((LPCWSTR)selectedComboBoxItem, L"Street") == 0) {
-                  result = search(buffer,ADDRESS);
+                  result = search(str,ADDRESS);
             }
 
             if (lstrcmpW((LPCWSTR)selectedComboBoxItem, L"Surname") == 0) {
-                 result = search(buffer, SURNAME);
+                 result = search(str, SURNAME);
             }
 
             InsertListViewItems(hWndListView, result);
@@ -303,7 +304,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             vector<std::string> params;
             for (HWND hEd : hEdits) {
                 ptr = ConvertToLPWSTR("");
-                SendMessage(hEd, WM_GETTEXT, (WPARAM)255, (LPARAM)ptr);
+                GetWindowText(hEd, ptr, 255);
+               // SendMessage(hEd, WM_GETTEXT, (WPARAM)255, (LPARAM)ptr);
 
                 char buffer[500];
 
